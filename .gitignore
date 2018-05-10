@@ -1,11 +1,3 @@
 #We dont want to push below files/folders to git
 
-.project
-.settings/
-.springBeans
-target/
-mvnw.cmd
-mvnw
-.mvn/
-.classpath
-derby.log
+
