@@ -29,13 +29,19 @@ public class UserService {
 	}
 	
 	public HGUser getUser(Integer userId){
-		return userList1.stream().filter(u -> u.getUserId().equals(userId)).findFirst().get();
+		Optional<HGUser> user= userRepository.findById(userId);
+		if(!user.isPresent()) {
+			System.out.println("===user not found===");
+			return  null;
+		}else {
+			return user.get();
+		}
+		
 		
 	}
 	
 	public void addUser(HGUser user) {
-		//userList.add(user);
-		//System.out.println(userList);
+		
 		userRepository.save(user);
 	}
 	
