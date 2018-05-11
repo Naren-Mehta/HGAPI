@@ -17,7 +17,6 @@ public class HGUser {
 	private Boolean enabled = false;
 	
 	
-	
 	public Integer getUserId() {
 		return userId;
 	}
