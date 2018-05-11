@@ -41,23 +41,15 @@ public class UserService {
 	}
 	
 	public void addUser(HGUser user) {
-		
 		userRepository.save(user);
 	}
 	
 	public void updateUser(HGUser user, Integer userId) {
-		for(int i=0;i<userList1.size();i++) {
-			HGUser u= userList1.get(i);
-			if(userList1.get(i).getUserId().equals(userId)) {
-				userList1.set(i, user);
-				return;
-			}
-		}
+		userRepository.save(user);
 	}
 	
 	public void deleteUser(Integer userId) {
-		
-		userList1.removeIf(u -> u.getUserId().equals(userId));
+		userRepository.deleteById(userId);
 		
 	}
 	
