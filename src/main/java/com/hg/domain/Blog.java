@@ -2,13 +2,14 @@ package com.hg.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 public class Blog {
 
 	@Id
-	private Integer userId;
+	private Integer blogId;
 	
 	private String title;
 	private String shortDescription;
@@ -16,11 +17,24 @@ public class Blog {
 	private Boolean enabled = false;
 	
 	
-	public Integer getUserId() {
-		return userId;
+	@ManyToOne
+	private HGUser user;
+	
+	
+	public HGUser getUser() {
+		return user;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(HGUser user) {
+		this.user = user;
+	}
+	
+	
+	
+	public Integer getBlogId() {
+		return blogId;
+	}
+	public void setBlogId(Integer blogId) {
+		this.blogId = blogId;
 	}
 	public String getTitle() {
 		return title;

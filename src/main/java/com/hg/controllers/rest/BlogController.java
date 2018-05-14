@@ -3,6 +3,7 @@ package com.hg.controllers.rest;
 import java.util.ArrayList;
 
 import com.hg.domain.Blog;
+import com.hg.domain.HGUser;
 import com.hg.service.BlogService;
 
 import java.util.List;
@@ -20,33 +21,39 @@ public class BlogController {
 	@Autowired
 	private BlogService blogService;
 
-	@RequestMapping("/blogs")
-	public List<Blog> getAllUsers() {
+	@RequestMapping("/users/{userId}/blogs")
+	public List<Blog> getAllBlogs(@PathVariable Integer userId) {
 
-		return blogService.getAllBlogs();
+		return blogService.getAllBlogs(userId);
 	}
 
-	@RequestMapping("/users/{userId}")
-	public HGUser getUser(@PathVariable Integer userId) {
-		return userService.getUser(userId);
+	@RequestMapping("/users/{userId}/blogs/{blogId}")
+	public Blog getBlog(@PathVariable Integer userId,@PathVariable Integer blogId) {
+		return blogService.getBlog(blogId);
 	}
 
-	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public void addUser(@RequestBody HGUser user) {
+	@RequestMapping(value = "/users/{userId}/addBlog", method = RequestMethod.POST)
+	public void addBlog(@RequestBody Blog blog, @PathVariable Integer userId) {
 
-		System.out.println("===="+user);
-		userService.addUser(user);		
-	}
-	
-	
-	@RequestMapping(value="/updateuser/{userId}",method=RequestMethod.PUT)
-	public void updateUser(@RequestBody HGUser user, @PathVariable Integer userId) {
-		userService.updateUser(user, userId);
+		HGUser user=new HGUser();
+		user.setUserId(userId);
+		blog.setUser(user);
+		System.out.println("===="+blog);
+		blogService.addBlog(blog);		
 	}
 	
-	@RequestMapping(value="/deleteuser/{userId}")
-	public void deleteUser(@PathVariable Integer userId) {
-		userService.deleteUser(userId);
+	
+	@RequestMapping(value="/users/{userId}/updateblog/{blogId}",method=RequestMethod.PUT)
+	public void updateBlog(@RequestBody Blog blog, @PathVariable Integer userId, @PathVariable Integer blogId) {
+		HGUser user=new HGUser();
+		user.setUserId(userId);
+		blog.setUser(user);
+		blogService.updateBlog(blog);
+	}
+	
+	@RequestMapping(value="/users/{userId}/deleteblog/{blogId}")
+	public void deleteBlog(@PathVariable Integer blogId) {
+		blogService.deleteBlog(blogId);
 	}
 	
 

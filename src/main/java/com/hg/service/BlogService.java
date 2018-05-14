@@ -15,10 +15,10 @@ public class BlogService {
 	@Autowired
 	private BlogRepository blogRepository;
 
-	public List<Blog> getAllBlogs(){
+	public List<Blog> getAllBlogs(Integer userId){
 		
 		List<Blog> blogList= new ArrayList<Blog>();
-		blogRepository.findAll().forEach(blogList::add);
+		blogRepository.findByUserUserId(userId).forEach(blogList::add);
 		
 		return blogList;
 	}
@@ -39,7 +39,7 @@ public class BlogService {
 		blogRepository.save(blog);
 	}
 	
-	public void updateBlog(Blog blog, Integer blogId) {
+	public void updateBlog(Blog blog) {
 		blogRepository.save(blog);
 	}
 	
